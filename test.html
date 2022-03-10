@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			
+		</style>
+	</head>
+	<body>
+		
+	</body>
+
+	<script>
+	function foo() { // 运行在严格模式下，this会绑定到undefined
+	    "use strict";
+	    
+	    console.log( this.a );
+	}
+	
+	var a = 2;
+	
+	// 调用
+	foo();
+	</script>
+</html>

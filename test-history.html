@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	
+	<script>
+		function log(str){
+			console.log(str)
+		}
+		/**
+		 * verifyPassword 校验密码规则
+		 * @param {String} passwd  密码
+		 */
+		function verifyPassword(account, passwd) {
+			
+			if (account == passwd) {
+				console.log("密码不能与账号相同");
+				return false;
+			}
+			//密码必须包含数字、字母
+			//密码长度8到16位
+			var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z].{8,16}$/;
+			if (!regex.test(passwd)) {
+				console.log("密码必须包含数字、大写字母、小写字母,长度8到16位");
+				return false;
+			}
+			
+			passwd = passwd.toLowerCase()
+		
+			// 不能出现 3 位以上（含三位）重复字母、数字、特殊字符，如 AAA、Aaa、111等;
+			var re = /([\da-zA-Z])*([\da-zA-Z])\2{2}([\da-zA-Z])*/g;
+			if (re.test(passwd)) {
+				console.log("不能出现 3 位以上（含三位）重复字母、数字、特殊字符，如 AAA、Aaa、111等");
+				return false;
+			}
+		
+			// 不能出现 3 位以上（含三位）连续字母、数字、特殊字符，如 ABC、Abc、123等;
+			if (!LxStr(passwd)) {
+				console.log("不能出现 3 位以上（含三位）连续字母、数字、特殊字符，如 ABC、Abc、123等");
+				return false;
+			}
+			
+			return true
+		}
+		
+		//不能连续字符（如123、abc）连续3位或3位以上
+		var LxStr = function(str) {
+			var arr = str.split('');
+			var flag = true;
+			for (var i = 1; i < arr.length - 1; i++) {
+				var firstIndex = arr[i - 1].charCodeAt();
+				var secondIndex = arr[i].charCodeAt();
+				var thirdIndex = arr[i + 1].charCodeAt();
+				thirdIndex - secondIndex == 1;
+				secondIndex - firstIndex == 1;
+				//判断数字和字母是否连续
+				if ((thirdIndex - secondIndex == 1) && (secondIndex - firstIndex == 1)) {
+					flag = false;
+				}
+			}
+			if (!flag) {
+				return flag;
+			}
+			return flag;
+		}
+		
+		
+		 verifyPassword('12','Aa34567!@')
+	</script>
+</html>
